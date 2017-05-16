@@ -11,7 +11,6 @@
 </style>
     
 <title>Drugstore</title>
-<div id="map"></div>
 
 <script>
     var location, label;
@@ -36,35 +35,32 @@
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1eYhE8DgMPKw78c4t-ER7WONluE7cjkE&callback=initMap"></script>
 
-		<section class="well ins1">
-          <div class="container hr">
-            <ul class="row product-list">
-              <li class="grid_6">
-              	<div class="box wow fadeInRight"/>
-                  <div class="box_aside">
-                    <div class="icon fa-plus"></div>
-                  </div>
-                  <div class="box_cnt__no-flow">
-                    <h3><c:out value="${drugstore.naimenovanieAptek}" /></h3>
-                    <p><c:out value="${drugstore.address}" /></p>
-                  </div>
-                  <div class="box_right_side">
-	                  <div>
+<main>
+        <section class="well1 ins2 mobile-center">
+        <div class="container">
+            <div class="row off2">
+              <div class="grid_4">
+              <div id="map"></div>
+                <h3><c:out value="${drugstore.naimenovanieAptek}" /></h3>
+                <p><c:out value="${drugstore.address}" /></p>
+                <div>
 		                  <c:forEach begin="1" end="${drugstore.raiting}" varStatus="loop">
-	                  		<i class="fa fa-star" aria-hidden="true"></i>
+	                  		<i class="fa fa-star" aria-hidden="true" data-index="<c:out value="${loop.count}" />" style="cursor:pointer"></i>
 						  </c:forEach>
-						  <c:forEach begin="1" end="${maxRateValue-drugstore.raiting}" varStatus="loop">
-	                  		<i class="fa fa-star" aria-hidden="true" style="color:gray"></i>
+						  <c:forEach begin="${drugstore.raiting+1}" end="${maxRateValue}" varStatus="loop">
+	                  		<i class="fa fa-star" aria-hidden="true" data-index="<c:out value="${loop.count}" />" style="color:gray;cursor:pointer"></i>
 						  </c:forEach>
 	                  </div>
-	                  <div>
 	                  <h3>${drugstore.peopleQuantity}</h3>
-	                  </div>
-                  </div>
-                </div>
-                <hr>
-              </li>
-            </ul>
+              </div>
+              
+            </div>
+            <hr>
+            <p><spring:message code="info.youCanLeaveACommentHere" /></p>
+            <c:if test="${pageContext.request.userPrincipal == null}">
+            	<p>Чтобы оставить комментарии вам нужно <a href="${contextPath}/sign-up-form">войти в систему</a></p>
+            </c:if>
           </div>
         </section>
+       </main>
 <%@include file="../layout/footer.jsp"%>

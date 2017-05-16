@@ -6,6 +6,7 @@ import kz.salikhanova.healthapp.service.UserService;
 import kz.salikhanova.healthapp.validator.UserValidator;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,13 +28,19 @@ public class UserController {
 	
 	@Autowired
     private UserValidator userValidator;
+	
+	@RequestMapping(value = "/sign-up-form", method = RequestMethod.GET)
+    public String signUpForm(Model model) {
+        model.addAttribute("user",new User());
+        return "/site/sign-up";
+    }
     
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("user") User user,
-    		BindingResult registrationResult, Model model) {
-    	userValidator.validate(user, registrationResult);
-        if (registrationResult.hasErrors()) {
-            return "/site/registration";
+    @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
+    public String signUp(@ModelAttribute("user") User user,
+    		BindingResult signupResult, Model model) {
+    	userValidator.validate(user, signupResult);
+        if (signupResult.hasErrors()) {
+            return "/site/sign-up";
         }
 
         userService.save(user);
@@ -43,8 +50,8 @@ public class UserController {
         return "redirect:/profile";
     }
     
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout) {
+    @RequestMapping(value = "/sign-in", method = RequestMethod.GET)
+    public String signIn(Model model, String error, String logout) {
         if (error != null) {
             model.addAttribute("error", "Username or password is incorrect.");
         }
@@ -53,7 +60,7 @@ public class UserController {
             model.addAttribute("message", "Logged out successfully.");
         }
         model.addAttribute("user",new User());
-        return "/site/login";
+        return "/site/sign-in";
     }
     
     @RequestMapping(value = {"/", "/profile"}, method = RequestMethod.GET)

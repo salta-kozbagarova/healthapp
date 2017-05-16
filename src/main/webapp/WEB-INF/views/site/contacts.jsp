@@ -1,71 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Contacts</title>
-    <meta charset="utf-8">
-    <meta name="format-detection" content="telephone=no">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/grid.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/google-map.css">
-    <link rel="stylesheet" href="css/mailform.css">
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery-migrate-1.2.1.js"></script><!--[if lt IE 9]>
-    <html class="lt-ie9">
-      <div style="clear: both; text-align:center; position: relative;"><a href="http://windows.microsoft.com/en-US/internet-explorer/.."><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
-    </html>
-    <script src="js/html5shiv.js"></script><![endif]-->
-    <script src="js/device.min.js"></script>
-  </head>
-  <body>
-    <div class="page">
-      <!--
-      ========================================================
-      							HEADER
-      ========================================================
-      
-      
-      -->
-      <header>
-        <div class="container">
-          <div class="brand">
-            <h1 class="brand_name"><a href="./">Business</a></h1>
-            <p class="brand_slogan">Company</p>
-          </div><a href="callto:#" class="fa-phone">800-2345-6789</a>
-          <p>One of our representatives will happily contact you within 24 hours. For urgent needs call us at</p>
-        </div>
-        <div id="stuck_container" class="stuck_container">
-          <div class="container">
-            <nav class="nav">
-              <ul data-type="navbar" class="sf-menu">
-                <li><a href="./">Home</a>
-                </li>
-                <li><a href="index-1.html">About</a>
-                  <ul>
-                    <li><a href="#">Lorem ipsum dolor</a></li>
-                    <li><a href="#">Conse ctetur adipisicing</a></li>
-                    <li><a href="#">Elit sed do eiusmod
-                        <ul>
-                          <li><a href="#">Lorem ipsum</a></li>
-                          <li><a href="#">Conse adipisicing</a></li>
-                          <li><a href="#">Sit amet dolore</a></li>
-                        </ul></a></li>
-                    <li><a href="#">Incididunt ut labore</a></li>
-                    <li><a href="#">Et dolore magna</a></li>
-                    <li><a href="#">Ut enim ad minim</a></li>
-                  </ul>
-                </li>
-                <li><a href="index-2.html">Services</a>
-                </li>
-                <li><a href="index-3.html">FAQS</a>
-                </li>
-                <li class="active"><a href="index-4.html">Contacts</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@include file="../layout/header.jsp"%>
+<link rel="stylesheet" href="${contextPath}/resources/css/google-map.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/mailform.css">
       <!--
       ========================================================
                                   CONTENT
@@ -156,20 +94,4 @@
           </div>
         </section>
       </main>
-      <!--
-      ========================================================
-                                  FOOTER
-      ========================================================
-      -->
-      <footer>
-        <section>
-          <div class="container">
-            <div class="copyright">Business Company © <span id="copyright-year"></span>.&nbsp;&nbsp;<a href="index-5.html">Privacy Policy</a>
-            </div>
-          </div>
-        </section>
-      </footer>
-    </div>
-    <script src="js/script.js"></script>
-  </body>
-</html>
+      <%@include file="../layout/footer.jsp"%>

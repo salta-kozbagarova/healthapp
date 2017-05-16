@@ -9,6 +9,5 @@ public interface DrugstoreService {
 	
 	List<Drugstore> findAll();
 	Drugstore findOne(Long id);
-	HashMap<String,Double> getCoordinates(String address);
 
 }

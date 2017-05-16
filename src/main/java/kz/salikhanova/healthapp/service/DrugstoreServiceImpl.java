@@ -16,11 +16,11 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 
 import kz.salikhanova.healthapp.model.Drugstore;
+import kz.salikhanova.healthapp.util.GoogleGeoCoder;
 
 @Service("drugstoreService")
 public class DrugstoreServiceImpl implements DrugstoreService {
 
-	private static String gglMapsApiUrl = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyD1eYhE8DgMPKw78c4t-ER7WONluE7cjkE";
 	private static String egovApiUrl = "http://data.egov.kz/api/v2/darihanalar1/v2";
 	
 	@Override
@@ -54,7 +54,7 @@ public class DrugstoreServiceImpl implements DrugstoreService {
 				Gson gson = new Gson();
 				drugstore = gson.fromJson(jsonObj.toString(), Drugstore.class);
 				if(drugstore.getAddress()!=null && !drugstore.getAddress().isEmpty()) {
-					if((coords = this.getCoordinates(drugstore.getAddress()))!=null) {
+					if((coords = GoogleGeoCoder.getCoordinates(drugstore.getAddress()))!=null) {
 						drugstore.setLat(coords.get("lat"));
 						drugstore.setLng(coords.get("lng"));
 					}
@@ -68,47 +68,6 @@ public class DrugstoreServiceImpl implements DrugstoreService {
 			System.out.println(e.getMessage());
 		}
 		return drugstores;
-	}
-	
-	@Override
-	public HashMap<String,Double> getCoordinates(String address) {
-		HashMap<String,Double> coordinates = new HashMap<String,Double>();
-		try{
-			String strUrl = this.gglMapsApiUrl+"&address="+URLEncoder.encode("г.јстана,"+address,"UTF-8");
-			URL url = new URL(strUrl);
-			HttpURLConnection con = (HttpURLConnection) url.openConnection();
-
-			con.setRequestMethod("GET");
-			con.setRequestProperty("User-Agent", "Mozilla/5.0");
-
-			int responseCode = con.getResponseCode();
-			System.out.println("\nSending 'GET' request to URL : " + strUrl);
-			System.out.println("Response Code : " + responseCode);
-
-			if(responseCode==200) {
-				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
-				String inputLine;
-				StringBuffer response = new StringBuffer();
-
-				while ((inputLine = bufferedReader.readLine()) != null) {
-					response.append(inputLine);
-				}
-				bufferedReader.close();
-				JSONObject jsonObj = new JSONObject(response.toString());
-				if(jsonObj.getString("status").compareToIgnoreCase("OK")==0) {
-					System.out.println("we r here");
-					JSONObject location = jsonObj.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
-					double lat = location.getDouble("lat");
-					double lng = location.getDouble("lng");
-					coordinates.put("lat", lat);
-					coordinates.put("lng", lng);
-					System.out.println("lat  "+lat+"  lng  "+lng);
-				}
-			}
-		} catch(Exception e){
-			System.out.println(e.getMessage());
-		}
-		return !coordinates.isEmpty()?coordinates:null;
 	}
 
 	@Override
@@ -139,7 +98,7 @@ public class DrugstoreServiceImpl implements DrugstoreService {
 			Gson gson = new Gson();
 			drugstore = gson.fromJson(jsonArr.getJSONObject(0).toString(), Drugstore.class);
 			if(drugstore.getAddress()!=null && !drugstore.getAddress().isEmpty()) {
-				if((coords = this.getCoordinates(drugstore.getAddress()))!=null) {
+				if((coords = GoogleGeoCoder.getCoordinates(drugstore.getAddress()))!=null) {
 					drugstore.setLat(coords.get("lat"));
 					drugstore.setLng(coords.get("lng"));
 				}

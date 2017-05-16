@@ -10,13 +10,21 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Component
 public class UserValidator implements Validator {
+	
+	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+			   + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	
+	private Pattern pattern;
+	private Matcher matcher;
 
 	@Resource(name = "userService")
-    private UserService userService;
+    private UserService userService; 
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -35,7 +43,17 @@ public class UserValidator implements Validator {
         if (userService.findByUsername(user.getUsername()) != null) {
             errors.rejectValue("username", "validation.username.duplicate");
         }
-
+        
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "validation.required");
+        pattern = Pattern.compile(EMAIL_PATTERN);
+        matcher = pattern.matcher(user.getEmail());
+        if (!matcher.matches()) {
+        	errors.rejectValue("email", "validation.email.incorrect", "Enter a correct email");
+        }  
+        if (userService.findByEmail(user.getEmail()) != null) {
+            errors.rejectValue("email", "validation.email.duplicate");
+        }
+        
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "validation.required");
         if (user.getPassword().length() < 4 || user.getPassword().length() > 32) {
             errors.rejectValue("password", "validation.password.size");

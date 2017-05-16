@@ -27,7 +27,7 @@
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.hbm2ddl.auto">update</prop><!-- create-drop -->
+                <prop key="hibernate.hbm2ddl.auto">create-drop</prop><!-- create-drop/update -->
                 <prop key="hibernate.hbm2ddl.import_files">import.sql</prop>
             </props>
         </property>

@@ -60,5 +60,10 @@ public class PlaceController {
 		model.addAttribute("maxRateValue", appParams.getProperty("app.places.maxRateValue"));
         return "/place/drugstore";
     }
+	
+	@RequestMapping(value = "/contacts", method = RequestMethod.GET)
+    public String drugstore(Model model) {
+        return "/site/contacts";
+    }
 
 }

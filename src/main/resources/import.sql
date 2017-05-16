@@ -1,5 +1,5 @@
-INSERT INTO users (id, username, password) values(nextval ('users_id_seq'), 'admin', '$2a$06$6n2RD7QxapaxJQ7hlIVAoOcZVFxoEpaR4g8ekNqKRcK2Bus70z3oe')
-INSERT INTO users (id, username, password) values(nextval ('users_id_seq'), 'student', '$2a$06$mHh2KEcWmIVw9p3jT9VUbuo4/YaWOvk3dX7Vk2ZNfVTeSou1Gs6py')
+INSERT INTO users (id, email, username, password) values(nextval ('users_id_seq'), 'admin@gmail.com', 'admin', '$2a$06$6n2RD7QxapaxJQ7hlIVAoOcZVFxoEpaR4g8ekNqKRcK2Bus70z3oe')
+INSERT INTO users (id, email, username, password) values(nextval ('users_id_seq'), 'student@gmail.com', 'student', '$2a$06$mHh2KEcWmIVw9p3jT9VUbuo4/YaWOvk3dX7Vk2ZNfVTeSou1Gs6py')
 INSERT INTO roles (id, name) values(nextval ('roles_id_seq'), 'ROLE_USER')
 INSERT INTO roles (id, name) values(nextval ('roles_id_seq'), 'ROLE_ADMIN')
 INSERT INTO user_roles (user_id,role_id) values(1, 2)

@@ -8,7 +8,5 @@ import kz.salikhanova.healthapp.model.Hospital;
 public interface HospitalService {
 	
 	List<Hospital> findAll();
-	
-	HashMap<String,Double> getCoordinates(String address);
 
 }

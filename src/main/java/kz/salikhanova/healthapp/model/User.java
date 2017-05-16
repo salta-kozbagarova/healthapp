@@ -1,6 +1,11 @@
 package kz.salikhanova.healthapp.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -20,10 +25,20 @@ public class User implements Serializable{
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="users_id_seq")
 	@SequenceGenerator(name="users_id_seq", sequenceName="users_id_seq", allocationSize=1)
     private Long id;
+	
+	@Email
+	@NotNull
+	@NotEmpty(message = "Email is required")
+    @Column(name = "email")
+    private String email;
 
+	@NotNull
+	@NotEmpty(message = "Username is required")
     @Column(name = "username")
     private String username;
 
+	@NotNull
+	@NotEmpty(message = "Password is required")
     @Column(name = "password")
     private String password;
 
@@ -43,7 +58,15 @@ public class User implements Serializable{
         this.id = id;
     }
 
-    public String getUsername() {
+    public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getUsername() {
         return username;
     }
 
