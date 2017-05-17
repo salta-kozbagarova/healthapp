@@ -78,10 +78,10 @@
                   </div>
                   <div class="box_right_side">
 	                  <div>
-		                  <c:forEach begin="1" end="${drugstore.raiting}" varStatus="loop">
+		                  <c:forEach begin="1" end="${drugstore.rating}" varStatus="loop">
 	                  		<i class="fa fa-star" aria-hidden="true"></i>
 						  </c:forEach>
-						  <c:forEach begin="1" end="${maxRateValue-drugstore.raiting}" varStatus="loop">
+						  <c:forEach begin="1" end="${maxRateValue-drugstore.rating}" varStatus="loop">
 	                  		<i class="fa fa-star" aria-hidden="true" style="color:gray"></i>
 						  </c:forEach>
 	                  </div>

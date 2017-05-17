@@ -60,7 +60,12 @@
         </spring:bind>
         </label>
         <div class="mfControls grid_12" style="margin-left:auto;">
-          <button type="submit" class="btn"><spring:message code="label.signup" /></button>
+          <button type="submit" class="btn" style="float:left"><spring:message code="label.signup" /></button>
+          <div class="grid_1">
+          <span style="font-size:11px"><spring:message code="label.alreadyRegistered?" /></span>
+          <br/>
+          <span style="font-size:12px; color:#5ab7de; cursor:pointer;"><a href="${contextPath}/sign-in"><spring:message code="label.signin" /></a></span>
+          </div>
         </div>
       
     </form:form>

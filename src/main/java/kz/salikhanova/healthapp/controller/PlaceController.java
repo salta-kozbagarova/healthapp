@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kz.salikhanova.healthapp.model.Comment;
 import kz.salikhanova.healthapp.model.Drugstore;
 import kz.salikhanova.healthapp.service.DrugstoreService;
 import kz.salikhanova.healthapp.service.HospitalService;
@@ -58,6 +59,7 @@ public class PlaceController {
     public String drugstore(@RequestParam(value = "id", required = true) Long id, Model model) {
 		model.addAttribute("drugstore", drugstoreService.findOne(id));
 		model.addAttribute("maxRateValue", appParams.getProperty("app.places.maxRateValue"));
+		model.addAttribute("comment", new Comment());
         return "/place/drugstore";
     }
 	

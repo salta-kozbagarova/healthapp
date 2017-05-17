@@ -1,0 +1,62 @@
+function doAjax() {
+		  
+		 var inputText = "bla bla";
+		 var cmnt = new Object();
+		 cmnt.comment =inputText;
+		 $.ajax({
+		  url : ctx+"/comments/getCharNum",
+		  type: 'POST',
+		  dataType: 'json',
+		  contentType: 'application/json',
+		     mimeType: 'application/json',
+		  data : JSON.stringify(cmnt),
+		  success: function (data) {
+		    
+		   var result = '"'+data.comment+' characters';
+		   console.log(result);
+		  }
+		 });
+		};
+	
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	console.log(header + ":" + token);
+	$(document).ajaxSend(function(e, xhr, options) {
+	    xhr.setRequestHeader(header, token);
+	});
+	console.log($("#commentForm").serialize());
+	$("#commentForm").submit(function(e) {
+		e.preventDefault();
+		var inputText = "bla bla";
+		 var cmnt = new Object();
+		 cmnt.comment =inputText;
+		 console.log(cmnt);
+		    console.log(JSON.stringify(cmnt));
+	    var comment = $(this).serialize();
+	    console.log(comment);
+	    console.log(JSON.stringify(comment));
+	    /* $.postJson(ctx+"/comments/add", comment, function(data) {
+	        console.log(data);
+	    }); */
+	    $.ajax({
+		    type: 'POST',
+		    url: ctx+"/comments/add",
+		    //dataType: 'json',
+			//contentType: 'application/json',
+			//mimeType: 'application/json',
+		    data: comment,//JSON.stringify(comment),
+		    success: function(data) {
+		        console.log(data);
+		    },
+		    error: function(err){
+		    	JSON.stringify(err);
+		    	console.log("error: "+JSON.stringify(err));
+		    }
+		    });
+	    //doAjax();
+	    return false;
+	});
+	
+	$.postJson = function(url, data, callback) {
+	    //return 
+	};

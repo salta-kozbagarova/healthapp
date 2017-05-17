@@ -7,7 +7,7 @@ public class Drugstore {
 	private String naimenovanie_aptek;
 	private Double lat;
 	private Double lng;
-	private Byte raiting=4;
+	private Byte rating=4;
 	private Integer peopleQuantity=158;
 	
 	public Drugstore() {
@@ -55,12 +55,12 @@ public class Drugstore {
 	}
 
 	
-	public Byte getRaiting() {
-		return raiting;
+	public Byte getRating() {
+		return rating;
 	}
 
-	public void setRaiting(Byte raiting) {
-		this.raiting = raiting;
+	public void setRating(Byte rating) {
+		this.rating = rating;
 	}
 
 	

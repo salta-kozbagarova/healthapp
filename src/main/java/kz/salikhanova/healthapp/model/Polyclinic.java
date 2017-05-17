@@ -11,7 +11,7 @@ public class Polyclinic {
 	private String vremia_priema;
 	private Double lat;
 	private Double lng;
-	private Byte raiting=4;
+	private Byte rating=4;
 	private Integer peopleQuantity=158;
 	
 	public Polyclinic() {
@@ -90,12 +90,12 @@ public class Polyclinic {
 		this.lng = lng;
 	}
 	
-	public Byte getRaiting() {
-		return raiting;
+	public Byte getRating() {
+		return rating;
 	}
 	
-	public void setRaiting(Byte raiting) {
-		this.raiting = raiting;
+	public void setRating(Byte rating) {
+		this.rating = rating;
 	}
 	
 	public Integer getPeopleQuantity() {
