@@ -15,8 +15,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "rating")
-public class Rating implements Serializable {
+@Table(name = "drugstore_rating")
+public class DrugstoreRating implements Serializable {
 
 	/**
 	 * 
@@ -25,21 +25,18 @@ public class Rating implements Serializable {
 
 	@Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="rating_id_seq")
-	@SequenceGenerator(name="rating_id_seq", sequenceName="rating_id_seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="drugstore_rating_id_seq")
+	@SequenceGenerator(name="drugstore_rating_id_seq", sequenceName="drugstore_rating_id_seq", allocationSize=1)
     private Long id;
 	
 	@Column(name = "price")
-    private Byte price;
+    private Short price;
 	
 	@Column(name = "drugs_availability")
-    private Byte drugs_availability;
+    private Short drugsAvailability;
 	
-	@Column(name = "place_type_id")
-    private PlaceType place_type;
-	
-	@Column(name = "place_id")
-    private Object place;
+	@Column(name = "drugstore_id")
+    private Long drugstoreId;
 	
 	@OneToOne
     @JoinColumn(name = "user_id", nullable = true)
@@ -53,20 +50,28 @@ public class Rating implements Serializable {
 		this.id = id;
 	}
 
-	public Byte getPrice() {
+	public Short getPrice() {
 		return price;
 	}
 
-	public void setPrice(Byte price) {
+	public void setPrice(Short price) {
 		this.price = price;
 	}
 
-	public Byte getDrugsAvailability() {
-		return drugs_availability;
+	public Short getDrugsAvailability() {
+		return drugsAvailability;
 	}
 
-	public void setDrugsAvailability(Byte drugs_availability) {
-		this.drugs_availability = drugs_availability;
+	public void setDrugsAvailability(Short drugsAvailability) {
+		this.drugsAvailability = drugsAvailability;
+	}
+
+	public Long getDrugstoreId() {
+		return drugstoreId;
+	}
+
+	public void setDrugstoreId(Long drugstoreId) {
+		this.drugstoreId = drugstoreId;
 	}
 
 	public User getUser() {

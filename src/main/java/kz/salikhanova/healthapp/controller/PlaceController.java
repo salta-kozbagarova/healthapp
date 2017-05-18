@@ -4,14 +4,18 @@ import java.util.Properties;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kz.salikhanova.healthapp.dao.CalculatedDrugstoreRatingDao;
+import kz.salikhanova.healthapp.model.CalculatedDrugstoreRating;
 import kz.salikhanova.healthapp.model.Comment;
 import kz.salikhanova.healthapp.model.Drugstore;
+import kz.salikhanova.healthapp.service.CalculatedDrugstoreRatingService;
 import kz.salikhanova.healthapp.service.DrugstoreService;
 import kz.salikhanova.healthapp.service.HospitalService;
 import kz.salikhanova.healthapp.service.PolyclinicService;

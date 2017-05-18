@@ -2,23 +2,27 @@ package kz.salikhanova.healthapp.model;
 
 public class Drugstore {
 	
-	private Integer id;
+	private Long id;
 	private String adress;
 	private String naimenovanie_aptek;
 	private Double lat;
 	private Double lng;
-	private Byte rating=4;
-	private Integer peopleQuantity=158;
+	private Short priceRating;
+	private Short drugsAvailabilityRating;
+	private Long priceCount;
+	private Long drugsAvailabilityCount;
+	private Short curUserPriceRating;
+	private Short curUserDrugsAvailabilityRating;
 	
 	public Drugstore() {
 		super();
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -53,23 +57,53 @@ public class Drugstore {
 	public void setLng(Double lng) {
 		this.lng = lng;
 	}
-
 	
-	public Byte getRating() {
-		return rating;
+	public Short getPriceRating() {
+		return this.priceRating;
 	}
 
-	public void setRating(Byte rating) {
-		this.rating = rating;
+	public void setPriceRating(Short priceRating) {
+		this.priceRating = priceRating;
 	}
 
-	
-	public Integer getPeopleQuantity() {
-		return peopleQuantity;
+	public Short getDrugsAvailabilityRating() {
+		return this.drugsAvailabilityRating;
 	}
 
-	public void setPeopleQuantity(Integer peopleQuantity) {
-		this.peopleQuantity = peopleQuantity;
+	public void setDrugsAvailabilityRating(Short drugsAvailabilityRating) {
+		this.drugsAvailabilityRating = drugsAvailabilityRating;
+	}
+
+	public Long getPriceCount() {
+		return this.priceCount;
+	}
+
+	public void setPriceCount(Long priceCount) {
+		this.priceCount = priceCount;
+	}
+
+	public Long getDrugsAvailabilityCount() {
+		return this.drugsAvailabilityCount;
+	}
+
+	public void setDrugsAvailabilityCount(Long drugsAvailabilityCount) {
+		this.drugsAvailabilityCount = drugsAvailabilityCount;
+	}
+
+	public Short getCurUserPriceRating() {
+		return curUserPriceRating;
+	}
+
+	public void setCurUserPriceRating(Short curUserPriceRating) {
+		this.curUserPriceRating = curUserPriceRating;
+	}
+
+	public Short getCurUserDrugsAvailabilityRating() {
+		return curUserDrugsAvailabilityRating;
+	}
+
+	public void setCurUserDrugsAvailabilityRating(Short curUserDrugsAvailabilityRating) {
+		this.curUserDrugsAvailabilityRating = curUserDrugsAvailabilityRating;
 	}
 
 	@Override

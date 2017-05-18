@@ -7,8 +7,8 @@
 <meta name="_csrf_header" content="${_csrf.headerName}"/>
 <style>
 	#map {
-		height: 300px;
-		width: 400px;
+		height: 400px;
+		width: auto;
 	}
 </style>
     
@@ -34,28 +34,58 @@
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1eYhE8DgMPKw78c4t-ER7WONluE7cjkE&callback=initMap"></script>
 
-<main>
-        <section class="well1 ins2 mobile-center">
-        <div class="container">
-            <div class="row off2">
-              <div class="grid_4">
-              <div id="map"></div>
-                <h3><c:out value="${drugstore.naimenovanieAptek}" /></h3>
-                <p><c:out value="${drugstore.address}" /></p>
-                <div>
-		                  <c:forEach begin="1" end="${drugstore.rating}" varStatus="loop">
-	                  		<i class="fa fa-star" aria-hidden="true" data-index="<c:out value="${loop.count}" />" style="cursor:pointer"></i>
-						  </c:forEach>
-						  <c:forEach begin="${drugstore.rating+1}" end="${maxRateValue}" varStatus="loop">
-	                  		<i class="fa fa-star" aria-hidden="true" data-index="<c:out value="${loop.count}" />" style="color:gray;cursor:pointer"></i>
-						  </c:forEach>
-	                  </div>
-	                  <h3>${drugstore.peopleQuantity}</h3>
+<main class="mobile-center">
+        <section>
+        <div class="container hr well1 ins2">
+            <div class="row">
+              <div class="grid_6">
+              	<div id="map"></div>
               </div>
-              
+              <div class="grid_6">
+	              <h2><c:out value="${drugstore.naimenovanieAptek}" /></h2>
+	              <div class="row">
+                  <div class="grid_3">
+                    <dl class="info">
+                      <dt>Name</dt>
+                      <dd><c:out value="${drugstore.naimenovanieAptek}" /></dd>
+                      <dt>Address</dt>
+                      <dd><c:out value="${drugstore.address}" /></dd>
+                    </dl>
+                  </div>
+                  <div class="grid_3">
+                  	<div style="text-align:center"><p><spring:message code="drugstoreRating.price" /></p></div>
+                    <div style="text-align:center">
+	                  <c:forEach begin="1" end="${drugstore.priceRating}" varStatus="loop">
+                  		<i class="fa fa-star" aria-hidden="true" style="cursor:pointer"></i>
+					  </c:forEach>
+					  <c:forEach begin="${drugstore.priceRating+1}" end="${maxRateValue}" varStatus="loop">
+                  		<i class="fa fa-star" aria-hidden="true" style="color:gray;cursor:pointer"></i>
+					  </c:forEach>
+                  	</div>
+                  	<div style="text-align:center">
+                  		<h3>${drugstore.priceCount}</h3>
+                  	</div>
+                  	<div style="text-align:center"><p><spring:message code="drugstoreRating.drugsAvailability" /></p></div>
+                    <div style="text-align:center">
+	                  <c:forEach begin="1" end="${drugstore.drugsAvailabilityRating}" varStatus="loop">
+                  		<i class="fa fa-star" aria-hidden="true" style="cursor:pointer"></i>
+					  </c:forEach>
+					  <c:forEach begin="${drugstore.drugsAvailabilityRating+1}" end="${maxRateValue}" varStatus="loop">
+                  		<i class="fa fa-star" aria-hidden="true" style="color:gray;cursor:pointer"></i>
+					  </c:forEach>
+                  	</div>
+                  	<div style="text-align:center">
+                  		<h3>${drugstore.drugsAvailabilityCount}</h3>
+                  	</div>
+                  </div>
+               	  </div>
+              </div>
             </div>
-            <hr>
-            <div class="row off2">
+        </div>
+        </section>
+        <section class="well1 ins3">
+          	<div class="container">
+            <div class="row off1">
             <div class="grid_6">
             	<p><spring:message code="info.youCanLeaveACommentHereAndRateTheDrugstore" /></p>
             </div>
@@ -71,16 +101,22 @@
 				<c:otherwise>
 				<div class="row off2">
 				<div class="grid_12">
-				<span>Цена: 
-					<c:forEach begin="1" end="${maxRateValue}" varStatus="loop">
-						<i class="fa fa-star priceRating" aria-hidden="true" data-index="<c:out value="${loop.count}" />" style="color:gray;cursor:pointer"></i>
-					</c:forEach></span>
+				<span><spring:message code="drugstoreRating.price" />
+					<c:forEach begin="1" end="${drugstore.curUserPriceRating}" varStatus="loop">
+                 		<i class="fa fa-star priceRating" aria-hidden="true" data-index="<c:out value="${loop.index}" />" style="cursor:pointer"></i>
+				  	</c:forEach>
+				  	<c:forEach begin="${drugstore.curUserPriceRating+1}" end="${maxRateValue}" varStatus="loop">
+                 		<i class="fa fa-star priceRating" aria-hidden="true" data-index="<c:out value="${loop.index}" />" style="color:gray;cursor:pointer"></i>
+				  	</c:forEach></span>
 				</div>
 				<div class="grid_12">
-				<span>Наличие препаратов: 
-					<c:forEach begin="1" end="${maxRateValue}" varStatus="loop">
-						<i class="fa fa-star drugsAvailabilityRating" aria-hidden="true" data-index="<c:out value="${loop.count}" />" style="color:gray;cursor:pointer"></i>
-					</c:forEach></span>
+				<span><spring:message code="drugstoreRating.drugsAvailability" />
+					<c:forEach begin="1" end="${drugstore.curUserDrugsAvailabilityRating}" varStatus="loop">
+                 		<i class="fa fa-star drugsAvailabilityRating" aria-hidden="true" data-index="<c:out value="${loop.index}" />" style="cursor:pointer"></i>
+				  	</c:forEach>
+				  	<c:forEach begin="${drugstore.curUserDrugsAvailabilityRating+1}" end="${maxRateValue}" varStatus="loop">
+                 		<i class="fa fa-star drugsAvailabilityRating" aria-hidden="true" data-index="<c:out value="${loop.index}" />" style="color:gray;cursor:pointer"></i>
+				  	</c:forEach></span>
 				</div>
 				</div>
 				<div class="row off2">
@@ -127,12 +163,41 @@
 $(function(){
 	
 	$('.priceRating').click(function(){
+		var rateNum = $(this).data('index');
 		$.ajax({
 		    type: 'GET',
-		    url: ctx+"/rating/rate",
-		    data: {price:$(this).data('index')},
-		    success: function(data) {
-		    	console.log(data);
+		    url: ctx+"/drugstore/rate-price",
+		    data: {id:${drugstore.id},price:rateNum},
+		    success: function(response) {
+		    	if(response==='success'){
+		    		$('.priceRating').each(function(index){
+		    			if(index<rateNum){
+		    				$(this).css('color','');
+		    			}else{
+		    				$(this).css('color','gray');
+		    			}
+		    		});
+		    	}
+		    }
+	    });
+	});
+	
+	$('.drugsAvailabilityRating').click(function(){
+		var rateNum = $(this).data('index');
+		$.ajax({
+		    type: 'GET',
+		    url: ctx+"/drugstore/rate-drugs-availability",
+		    data: {id:${drugstore.id},drugsAvailability:rateNum},
+		    success: function(response) {
+		    	if(response==='success'){
+		    		$('.drugsAvailabilityRating').each(function(index){
+		    			if(index<rateNum){
+		    				$(this).css('color','');
+		    			}else{
+		    				$(this).css('color','gray');
+		    			}
+		    		});
+		    	}
 		    }
 	    });
 	});

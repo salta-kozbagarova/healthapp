@@ -110,7 +110,7 @@ public class Polyclinic {
 	public String toString() {
 		return "Polyclinic [id=" + id + ", naimenovanie_oganizacii=" + naimenovanie_oganizacii + ", adress=" + adress
 				+ ", adress_saita=" + adress_saita + ", kontact_tel=" + kontact_tel + ", fio_rukovoditel="
-				+ fio_rukovoditel + ", vremia_priema=" + vremia_priema + ", lat=" + lat + ", lng=" + lng + ", raiting="
-				+ raiting + ", peopleQuantity=" + peopleQuantity + "]";
+				+ fio_rukovoditel + ", vremia_priema=" + vremia_priema + ", lat=" + lat + ", lng=" + lng + ", rating="
+				+ rating + ", peopleQuantity=" + peopleQuantity + "]";
 	}
 }
