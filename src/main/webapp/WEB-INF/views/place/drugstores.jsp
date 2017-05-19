@@ -9,7 +9,7 @@
 	}
 </style>
     
-<title>Drugstores</title>
+<title><spring:message code="label.drugstores" /></title>
 <div style="float:right" id="map"></div>
 
 <script>

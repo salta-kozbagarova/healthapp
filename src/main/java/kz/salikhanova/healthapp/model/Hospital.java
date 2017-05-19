@@ -2,7 +2,7 @@ package kz.salikhanova.healthapp.model;
 
 public class Hospital {
 
-	private Integer id;
+	private Long id;
 	private String naimenovanie_oganizacii;
 	private String adress;
 	private String adress_saita;
@@ -11,18 +11,22 @@ public class Hospital {
 	private String vremia_priema;
 	private Double lat;
 	private Double lng;
-	private Byte rating=4;
-	private Integer peopleQuantity=158;
+	private Short priceRating;
+	private Short serviceRating;
+	private Long priceCount;
+	private Long serviceCount;
+	private Short curUserPriceRating;
+	private Short curUserServiceRating;
 	
 	public Hospital() {
 		super();
 	}
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
@@ -42,35 +46,35 @@ public class Hospital {
 		this.adress = adress;
 	}
 	
-	public String getAddressSaita() {
+	public String getSiteAddress() {
 		return adress_saita;
 	}
 	
-	public void setAddressSaita(String adress_saita) {
+	public void setSiteAddress(String adress_saita) {
 		this.adress_saita = adress_saita;
 	}
 	
-	public String getKontactTel() {
+	public String getPhonenumber() {
 		return kontact_tel;
 	}
 	
-	public void setKontactTel(String kontact_tel) {
+	public void setPhonenumber(String kontact_tel) {
 		this.kontact_tel = kontact_tel;
 	}
 	
-	public String getFioRukovoditel() {
+	public String getHeadName() {
 		return fio_rukovoditel;
 	}
 	
-	public void setFioRukovoditel(String fio_rukovoditel) {
+	public void setHeadName(String fio_rukovoditel) {
 		this.fio_rukovoditel = fio_rukovoditel;
 	}
 	
-	public String getVremiaPriema() {
+	public String getVisitTime() {
 		return vremia_priema;
 	}
 	
-	public void setVremiaPriema(String vremia_priema) {
+	public void setVisitTime(String vremia_priema) {
 		this.vremia_priema = vremia_priema;
 	}
 	
@@ -89,28 +93,62 @@ public class Hospital {
 	public void setLng(Double lng) {
 		this.lng = lng;
 	}
-	
-	public Byte getRating() {
-		return rating;
+
+	public Short getPriceRating() {
+		return priceRating;
 	}
-	
-	public void setRating(Byte rating) {
-		this.rating = rating;
+
+	public void setPriceRating(Short priceRating) {
+		this.priceRating = priceRating;
 	}
-	
-	public Integer getPeopleQuantity() {
-		return peopleQuantity;
+
+	public Short getServiceRating() {
+		return serviceRating;
 	}
-	
-	public void setPeopleQuantity(Integer peopleQuantity) {
-		this.peopleQuantity = peopleQuantity;
+
+	public void setServiceRating(Short serviceRating) {
+		this.serviceRating = serviceRating;
 	}
-	
+
+	public Long getPriceCount() {
+		return priceCount;
+	}
+
+	public void setPriceCount(Long priceCount) {
+		this.priceCount = priceCount;
+	}
+
+	public Long getServiceCount() {
+		return serviceCount;
+	}
+
+	public void setServiceCount(Long serviceCount) {
+		this.serviceCount = serviceCount;
+	}
+
+	public Short getCurUserPriceRating() {
+		return curUserPriceRating;
+	}
+
+	public void setCurUserPriceRating(Short curUserPriceRating) {
+		this.curUserPriceRating = curUserPriceRating;
+	}
+
+	public Short getCurUserServiceRating() {
+		return curUserServiceRating;
+	}
+
+	public void setCurUserServiceRating(Short curUserServiceRating) {
+		this.curUserServiceRating = curUserServiceRating;
+	}
+
 	@Override
 	public String toString() {
 		return "Hospital [id=" + id + ", naimenovanie_oganizacii=" + naimenovanie_oganizacii + ", adress=" + adress
 				+ ", adress_saita=" + adress_saita + ", kontact_tel=" + kontact_tel + ", fio_rukovoditel="
-				+ fio_rukovoditel + ", vremia_priema=" + vremia_priema + ", lat=" + lat + ", lng=" + lng + ", rating="
-				+ rating + ", peopleQuantity=" + peopleQuantity + "]";
+				+ fio_rukovoditel + ", vremia_priema=" + vremia_priema + ", lat=" + lat + ", lng=" + lng
+				+ ", priceRating=" + priceRating + ", serviceRating=" + serviceRating + ", priceCount=" + priceCount
+				+ ", serviceCount=" + serviceCount + ", curUserPriceRating=" + curUserPriceRating
+				+ ", curUserServiceRating=" + curUserServiceRating + "]";
 	}
 }

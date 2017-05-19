@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kz.salikhanova.healthapp.dao.CalculatedDrugstoreRatingDao;
 import kz.salikhanova.healthapp.model.CalculatedDrugstoreRating;
-import kz.salikhanova.healthapp.model.Comment;
 import kz.salikhanova.healthapp.model.Drugstore;
 import kz.salikhanova.healthapp.service.CalculatedDrugstoreRatingService;
+import kz.salikhanova.healthapp.service.DrugstoreCommentService;
 import kz.salikhanova.healthapp.service.DrugstoreService;
+import kz.salikhanova.healthapp.service.HospitalCommentService;
 import kz.salikhanova.healthapp.service.HospitalService;
 import kz.salikhanova.healthapp.service.PolyclinicService;
 
@@ -34,6 +35,12 @@ public class PlaceController {
 	
 	@Resource(name="polyclinicService")
 	private PolyclinicService polyclinicService;
+	
+	@Resource(name = "drugstoreCommentService")
+    private DrugstoreCommentService drugstoreCommentService;
+	
+	@Resource(name = "hospitalCommentService")
+    private HospitalCommentService hospitalCommentService;
 	
 	@Resource(name="appParams")
 	private Properties appParams;
@@ -63,8 +70,16 @@ public class PlaceController {
     public String drugstore(@RequestParam(value = "id", required = true) Long id, Model model) {
 		model.addAttribute("drugstore", drugstoreService.findOne(id));
 		model.addAttribute("maxRateValue", appParams.getProperty("app.places.maxRateValue"));
-		model.addAttribute("comment", new Comment());
+		model.addAttribute("comments", drugstoreCommentService.findFirst10ByDrugstoreIdOrderByDateDesc(id));
         return "/place/drugstore";
+    }
+	
+	@RequestMapping(value = "/hospital", method = RequestMethod.GET)
+    public String hospital(@RequestParam(value = "id", required = true) Long id, Model model) {
+		model.addAttribute("hospital", hospitalService.findOne(id));
+		model.addAttribute("maxRateValue", appParams.getProperty("app.places.maxRateValue"));
+		model.addAttribute("comments", hospitalCommentService.findFirst10ByHospitalIdOrderByDateDesc(id));
+        return "/place/hospital";
     }
 	
 	@RequestMapping(value = "/contacts", method = RequestMethod.GET)

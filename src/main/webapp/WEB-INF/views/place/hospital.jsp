@@ -12,14 +12,14 @@
 	}
 </style>
     
-<title><spring:message code="label.drugstore" /></title>
+<title><spring:message code="label.hospital" /></title>
 
 <script>
     function initMap() {
     	var location = {};
-        <c:if test="${drugstore.lat!=null && drugstore.lng!=null}">
-    	    location = {lat:<c:out value="${drugstore.lat}" />,
-    			lng:<c:out value="${drugstore.lng}" />};
+        <c:if test="${hospital.lat!=null && hospital.lng!=null}">
+    	    location = {lat:<c:out value="${hospital.lat}" />,
+    			lng:<c:out value="${hospital.lng}" />};
     	</c:if>
 		var center = {lat: 51.1535545, lng: 71.4809837};
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -42,40 +42,48 @@
               	<div id="map"></div>
               </div>
               <div class="grid_6">
-	              <h2><c:out value="${drugstore.naimenovanieAptek}" /></h2>
+	              <h2><c:out value="${hospital.naimenovanieOganizacii}" /></h2>
 	              <div class="row">
                   <div class="grid_3">
                     <dl class="info">
                       <dt>Name</dt>
-                      <dd><c:out value="${drugstore.naimenovanieAptek}" /></dd>
+                      <dd><c:out value="${hospital.naimenovanieOganizacii}" /></dd>
                       <dt>Address</dt>
-                      <dd><c:out value="${drugstore.address}" /></dd>
+                      <dd><c:out value="${hospital.address}" /></dd>
+                      <dt>Address</dt>
+                      <dd><c:out value="${hospital.siteAddress}" /></dd>
+                      <dt>Address</dt>
+                      <dd><c:out value="${hospital.phonenumber}" /></dd>
+                      <dt>Address</dt>
+                      <dd><c:out value="${hospital.headName}" /></dd>
+                      <dt>Address</dt>
+                      <dd><c:out value="${hospital.visitTime}" /></dd>
                     </dl>
                   </div>
                   <div class="grid_3">
-                  	<div style="text-align:center"><p><spring:message code="drugstoreRating.price" /></p></div>
+                  	<div style="text-align:center"><p><spring:message code="hospitalRating.price" /></p></div>
                     <div style="text-align:center">
-	                  <c:forEach begin="1" end="${drugstore.priceRating}" varStatus="loop">
+	                  <c:forEach begin="1" end="${hospital.priceRating}" varStatus="loop">
                   		<i class="fa fa-star" aria-hidden="true" style="cursor:pointer"></i>
 					  </c:forEach>
-					  <c:forEach begin="${drugstore.priceRating+1}" end="${maxRateValue}" varStatus="loop">
+					  <c:forEach begin="${hospital.priceRating+1}" end="${maxRateValue}" varStatus="loop">
                   		<i class="fa fa-star" aria-hidden="true" style="color:gray;cursor:pointer"></i>
 					  </c:forEach>
                   	</div>
                   	<div style="text-align:center">
-                  		<h3>${drugstore.priceCount}</h3>
+                  		<h3>${hospital.priceCount}</h3>
                   	</div>
-                  	<div style="text-align:center"><p><spring:message code="drugstoreRating.drugsAvailability" /></p></div>
+                  	<div style="text-align:center"><p><spring:message code="hospitalRating.service" /></p></div>
                     <div style="text-align:center">
-	                  <c:forEach begin="1" end="${drugstore.drugsAvailabilityRating}" varStatus="loop">
+	                  <c:forEach begin="1" end="${hospital.serviceRating}" varStatus="loop">
                   		<i class="fa fa-star" aria-hidden="true" style="cursor:pointer"></i>
 					  </c:forEach>
-					  <c:forEach begin="${drugstore.drugsAvailabilityRating+1}" end="${maxRateValue}" varStatus="loop">
+					  <c:forEach begin="${hospital.serviceRating+1}" end="${maxRateValue}" varStatus="loop">
                   		<i class="fa fa-star" aria-hidden="true" style="color:gray;cursor:pointer"></i>
 					  </c:forEach>
                   	</div>
                   	<div style="text-align:center">
-                  		<h3>${drugstore.drugsAvailabilityCount}</h3>
+                  		<h3>${hospital.serviceCount}</h3>
                   	</div>
                   </div>
                	  </div>
@@ -87,7 +95,7 @@
           	<div class="container">
             <div class="row off1">
             <div class="grid_6">
-            	<p><spring:message code="info.youCanLeaveACommentHereAndRateTheDrugstore" /></p>
+            	<p><spring:message code="info.youCanLeaveACommentHereAndRateTheHospital" /></p>
             </div>
             </div>
             <c:choose>
@@ -101,38 +109,25 @@
 				<c:otherwise>
 				<div class="row off2">
 				<div class="grid_12">
-				<span><spring:message code="drugstoreRating.price" />
-					<c:forEach begin="1" end="${drugstore.curUserPriceRating}" varStatus="loop">
+				<span><spring:message code="hospitalRating.price" />
+					<c:forEach begin="1" end="${hospital.curUserPriceRating}" varStatus="loop">
                  		<i class="fa fa-star priceRating" aria-hidden="true" data-index="<c:out value="${loop.index}" />" style="cursor:pointer"></i>
 				  	</c:forEach>
-				  	<c:forEach begin="${drugstore.curUserPriceRating+1}" end="${maxRateValue}" varStatus="loop">
+				  	<c:forEach begin="${hospital.curUserPriceRating+1}" end="${maxRateValue}" varStatus="loop">
                  		<i class="fa fa-star priceRating" aria-hidden="true" data-index="<c:out value="${loop.index}" />" style="color:gray;cursor:pointer"></i>
 				  	</c:forEach></span>
 				</div>
 				<div class="grid_12">
-				<span><spring:message code="drugstoreRating.drugsAvailability" />
-					<c:forEach begin="1" end="${drugstore.curUserDrugsAvailabilityRating}" varStatus="loop">
-                 		<i class="fa fa-star drugsAvailabilityRating" aria-hidden="true" data-index="<c:out value="${loop.index}" />" style="cursor:pointer"></i>
+				<span><spring:message code="hospitalRating.service" />
+					<c:forEach begin="1" end="${hospital.curUserServiceRating}" varStatus="loop">
+                 		<i class="fa fa-star serviceRating" aria-hidden="true" data-index="<c:out value="${loop.index}" />" style="cursor:pointer"></i>
 				  	</c:forEach>
-				  	<c:forEach begin="${drugstore.curUserDrugsAvailabilityRating+1}" end="${maxRateValue}" varStatus="loop">
-                 		<i class="fa fa-star drugsAvailabilityRating" aria-hidden="true" data-index="<c:out value="${loop.index}" />" style="color:gray;cursor:pointer"></i>
+				  	<c:forEach begin="${hospital.curUserServiceRating+1}" end="${maxRateValue}" varStatus="loop">
+                 		<i class="fa fa-star serviceRating" aria-hidden="true" data-index="<c:out value="${loop.index}" />" style="color:gray;cursor:pointer"></i>
 				  	</c:forEach></span>
 				</div>
 				</div>
 				<div class="row off2">
-					<%-- <form:form id="commentForm" method="post" modelAttribute="comment" action="${contextPath}/comments/add" class="mailform off2 grid_6" style="margin-left:auto;">
-		              <fieldset class="row">
-		                <label class="grid_6">
-		                <spring:bind path="comment">
-		                  <form:textarea style="height:200px;" path="comment" rows="3" value="sdvsvs" placeholder="Message:"></form:textarea>
-		                  <form:errors path="comment"></form:errors>
-		                </spring:bind>
-		                </label>
-		                <div class="mfControls grid_4" style="float:right">
-		                  <button id="commentBtn" class="btn" style="float:right"><spring:message code="label.send" /></button>
-		                </div>
-		              </fieldset>
-					</form:form> --%>
 					<form id="commentForm" method="post" action="${contextPath}/comments/add" class="mailform off2 grid_6">
 		              <fieldset class="row">
 		                <label class="grid_6">
@@ -154,11 +149,9 @@
 					<div class="grid_6">
 						<h4><c:out value="${comment.user.username}" /></h4>
 						<p><c:out value="${comment.comment}" /></p>
-						<p><c:out value="${comment.formattedDate}" /></p>
 					</div>
 				</div>
 			</c:forEach>
-			<p id="moreComments" data-page="1">more...</p>
 			</div>
           </div>
         </section>
@@ -166,32 +159,12 @@
 <script>
 $(function(){
 	
-	$('#moreComments').click(function(){
-		var page = $(this).data('page');
-		var id = ${drugstore.id};
-		$.ajax({
-		    type: 'GET',
-		    url: ctx+"/drugstore/comments",
-		    dataType: 'json',
-		    contentType: 'application/json',
-		    data: {id:id,pageNumber:page},
-		    success: function(response) {
-		    	for ( var i = 0; i < response.length; i++) {
-		    		console.log(response[i]);
-		    	}
-		    	console.log(response);
-		    	var d = JSON.parse(response);
-		    	console.log(d);
-		    }
-	    });
-	});
-	
 	$('.priceRating').click(function(){
 		var rateNum = $(this).data('index');
 		$.ajax({
 		    type: 'GET',
-		    url: ctx+"/drugstore/rate-price",
-		    data: {id:${drugstore.id},price:rateNum},
+		    url: ctx+"/hospital/rate-price",
+		    data: {id:${hospital.id},price:rateNum},
 		    success: function(response) {
 		    	if(response==='success'){
 		    		$('.priceRating').each(function(index){
@@ -206,15 +179,15 @@ $(function(){
 	    });
 	});
 	
-	$('.drugsAvailabilityRating').click(function(){
+	$('.serviceRating').click(function(){
 		var rateNum = $(this).data('index');
 		$.ajax({
 		    type: 'GET',
-		    url: ctx+"/drugstore/rate-drugs-availability",
-		    data: {id:${drugstore.id},drugsAvailability:rateNum},
+		    url: ctx+"/hospital/rate-service",
+		    data: {id:${hospital.id},service:rateNum},
 		    success: function(response) {
 		    	if(response==='success'){
-		    		$('.drugsAvailabilityRating').each(function(index){
+		    		$('.serviceRating').each(function(index){
 		    			if(index<rateNum){
 		    				$(this).css('color','');
 		    			}else{
@@ -237,10 +210,10 @@ $(function(){
 	    var comment = $(this).serialize();
 	    $.ajax({
 		    type: 'POST',
-		    url: ctx+"/drugstore/leave-a-comment?id="+${drugstore.id},
+		    url: ctx+"/hospital/leave-a-comment?id="+${hospital.id},
 		    data: comment,
 		    success: function(data) {
-		    	newCommentBlock = "<div class=\"row off2\"><div class=\"grid_6\"><h4>" + data.username + "</h4><p>" + data.comment + "</p><p>" + data.formattedDate + "</p></div></div>";
+		    	newCommentBlock = "<div class=\"row off2\"><div class=\"grid_6\"><h4>" + data.username + "</h4><p>" + data.comment + "</p></div></div>";
 		    	$("#comments").prepend(newCommentBlock);
 		    }
 	    });

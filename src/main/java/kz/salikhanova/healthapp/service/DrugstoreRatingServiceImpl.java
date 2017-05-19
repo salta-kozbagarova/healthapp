@@ -18,8 +18,8 @@ public class DrugstoreRatingServiceImpl implements DrugstoreRatingService {
 	}
 
 	@Override
-	public void save(DrugstoreRating rating) {
-		drugstoreRatingDao.save(rating);
+	public void save(DrugstoreRating drugstoreRating) {
+		drugstoreRatingDao.save(drugstoreRating);
 	}
 
 	@Override

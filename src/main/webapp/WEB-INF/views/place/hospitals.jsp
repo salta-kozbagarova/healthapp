@@ -9,7 +9,7 @@
 	}
 </style>
     
-<title>Drugstores</title>
+<title><spring:message code="label.hospitals" /></title>
 <div style="float:right" id="map"></div>
 
 <script>
@@ -73,20 +73,20 @@
                     <div class="icon fa-plus"></div>
                   </div>
                   <div class="box_cnt__no-flow" style="float:left; width:350px;">
-                    <h3><a onclick="window.open('${contextPath}/places/drugstore?id=${hospital.id}', '_blank')" style="cursor:pointer"><c:out value="${hospital.naimenovanieOganizacii}" /></a></h3>
+                    <h3><a onclick="window.open('${contextPath}/places/hospital?id=${hospital.id}', '_blank')" style="cursor:pointer"><c:out value="${hospital.naimenovanieOganizacii}" /></a></h3>
                     <p><c:out value="${hospital.address}" /></p>
                   </div>
                   <div class="box_right_side">
 	                  <div>
-		                  <c:forEach begin="1" end="${hospital.rating}" varStatus="loop">
+		                  <c:forEach begin="1" end="${hospital.priceRating}" varStatus="loop">
 	                  		<i class="fa fa-star" aria-hidden="true"></i>
 						  </c:forEach>
-						  <c:forEach begin="1" end="${maxRateValue-hospital.rating}" varStatus="loop">
+						  <c:forEach begin="1" end="${maxRateValue-hospital.priceRating}" varStatus="loop">
 	                  		<i class="fa fa-star" aria-hidden="true" style="color:gray"></i>
 						  </c:forEach>
 	                  </div>
 	                  <div>
-	                  <h3>${hospital.peopleQuantity}</h3>
+	                  <h3>${hospital.priceCount}</h3>
 	                  </div>
                   </div>
                 </div>

@@ -51,7 +51,7 @@
           <div class="container">
             <nav class="nav">
               <ul data-type="navbar" class="sf-menu">
-                <li class="active"><a href="${contextPath}/main"><spring:message code="page.main"/></a>
+                <li class="active"><a href="${contextPath}/home"><spring:message code="page.home"/></a>
                 </li>
                 <li><a onclick="return false;"><spring:message code="page.drugstoresAndMedicalFacilities"/></a>
                   <ul>
@@ -59,15 +59,6 @@
                     <li><a href="${contextPath}/places/hospitals"><spring:message code="page.hospitals"/></a></li>
                     <li><a href="${contextPath}/places/polyclinics"><spring:message code="page.polyclinics"/></a></li>
                     <li><a href="${contextPath}/places/medical-centers"><spring:message code="page.medicalCenters"/></a></li>
-                    <li><a href="#">Elit sed do eiusmod
-                        <ul>
-                          <li><a href="#">Lorem ipsum</a></li>
-                          <li><a href="#">Conse adipisicing</a></li>
-                          <li><a href="#">Sit amet dolore</a></li>
-                        </ul></a></li>
-                    <li><a href="#">Incididunt ut labore</a></li>
-                    <li><a href="#">Et dolore magna</a></li>
-                    <li><a href="#">Ut enim ad minim</a></li>
                   </ul>
                 </li>
                 <li><a href="index-2.html">Services</a>
