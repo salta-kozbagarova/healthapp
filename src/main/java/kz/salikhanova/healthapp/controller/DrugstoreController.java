@@ -50,13 +50,13 @@ public class DrugstoreController {
 	}
 
 	@RequestMapping(value = "/leave-a-comment", method=RequestMethod.POST)//produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE
-	public @ResponseBody Map<String, ? extends Object> leaveAComment(@RequestParam Long id, DrugstoreComment drugstoreComment, HttpServletResponse response) {
+	public @ResponseBody Map<String, ? extends Object> leaveAComment(@RequestParam Long drugstoreId, DrugstoreComment drugstoreComment, HttpServletResponse response) {
 	    if(drugstoreComment.getComment().isEmpty()) {
 	    	response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 	    	return Collections.singletonMap("error", "error");
 	    } else {
 	    	drugstoreComment.setDate(new Date());
-	    	drugstoreComment.setDrugstoreId(id);
+	    	drugstoreComment.setDrugstoreId(drugstoreId);
 	    	drugstoreComment.setUser(userService.getCurrentUser());
 	    	drugstoreCommentService.save(drugstoreComment);
 	        Map<String, Object> commentMap = new HashMap<String, Object>();
@@ -69,24 +69,8 @@ public class DrugstoreController {
 	
 	@RequestMapping(value = "/comments", method=RequestMethod.GET)
 	public @ResponseBody Page<DrugstoreComment> getComments(@RequestParam Long id, @RequestParam Integer pageNumber) {
-		PageRequest pageRequest = new PageRequest(0, 10, Sort.Direction.DESC, "date");
-		System.out.println(pageRequest.getPageSize());
+		PageRequest pageRequest = new PageRequest(pageNumber, 10, Sort.Direction.DESC, "date");
 		Page<DrugstoreComment> pages = drugstoreCommentService.findByDrugstoreId(id, pageRequest);
-		for (DrugstoreComment p : pages) {
-			System.out.println(p);
-		}
 		return pages;
-	}
-	
-	@RequestMapping(value = "/commentss", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public void getCommentss(@RequestParam Long id, @RequestParam Integer pageNumber) {
-		PageRequest pageRequest = new PageRequest(0, 10, Sort.Direction.DESC, "date");
-		System.out.println(pageRequest.getPageSize());
-		Page<DrugstoreComment> pages = drugstoreCommentService.findByDrugstoreId(id, pageRequest);
-		System.out.println(pages.getSize());
-		for (DrugstoreComment p : pages) {
-			System.out.println(p);
-		}
-		
 	}
 }

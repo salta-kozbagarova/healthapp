@@ -10,12 +10,16 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kz.salikhanova.healthapp.model.DrugstoreComment;
 import kz.salikhanova.healthapp.model.HospitalComment;
 import kz.salikhanova.healthapp.service.HospitalCommentService;
 import kz.salikhanova.healthapp.service.HospitalService;
@@ -47,13 +51,13 @@ public class HospitalController {
 	}
 	
 	@RequestMapping(value = "/leave-a-comment", method=RequestMethod.POST)
-	public @ResponseBody Map<String, ? extends Object> leaveAComment(@RequestParam Long id, HospitalComment hospitalComment, HttpServletResponse response) {
+	public @ResponseBody Map<String, ? extends Object> leaveAComment(@RequestParam Long hospitalId, HospitalComment hospitalComment, HttpServletResponse response) {
 	    if(hospitalComment.getComment().isEmpty()) {
 	    	response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 	    	return Collections.singletonMap("error", "error");
 	    } else {
 	    	hospitalComment.setDate(new Date());
-	    	hospitalComment.setHospitalId(id);
+	    	hospitalComment.setHospitalId(hospitalId);
 	    	hospitalComment.setUser(userService.getCurrentUser());
 	    	hospitalCommentService.save(hospitalComment);
 	        Map<String, Object> commentMap = new HashMap<String, Object>();
@@ -62,5 +66,12 @@ public class HospitalController {
 	        commentMap.put("formattedDate", hospitalComment.getFormattedDate());
 	        return commentMap;
 	    }
+	}
+	
+	@RequestMapping(value = "/comments", method=RequestMethod.GET)
+	public @ResponseBody Page<HospitalComment> getComments(@RequestParam Long id, @RequestParam Integer pageNumber) {
+		PageRequest pageRequest = new PageRequest(pageNumber, 10, Sort.Direction.DESC, "date");
+		Page<HospitalComment> pages = hospitalCommentService.findByHospitalId(id, pageRequest);
+		return pages;
 	}
 }

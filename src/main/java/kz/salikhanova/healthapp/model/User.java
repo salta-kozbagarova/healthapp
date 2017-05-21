@@ -7,6 +7,8 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Set;
 
@@ -39,13 +41,15 @@ public class User implements Serializable{
 
 	@NotNull
 	@NotEmpty(message = "Password is required")
+	
+	@JsonIgnore
     @Column(name = "password")
     private String password;
 
     @Transient
     private String confirmPassword;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;

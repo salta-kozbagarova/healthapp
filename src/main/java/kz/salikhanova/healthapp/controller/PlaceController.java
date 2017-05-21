@@ -70,7 +70,6 @@ public class PlaceController {
     public String drugstore(@RequestParam(value = "id", required = true) Long id, Model model) {
 		model.addAttribute("drugstore", drugstoreService.findOne(id));
 		model.addAttribute("maxRateValue", appParams.getProperty("app.places.maxRateValue"));
-		model.addAttribute("comments", drugstoreCommentService.findFirst10ByDrugstoreIdOrderByDateDesc(id));
         return "/place/drugstore";
     }
 	
@@ -78,7 +77,6 @@ public class PlaceController {
     public String hospital(@RequestParam(value = "id", required = true) Long id, Model model) {
 		model.addAttribute("hospital", hospitalService.findOne(id));
 		model.addAttribute("maxRateValue", appParams.getProperty("app.places.maxRateValue"));
-		model.addAttribute("comments", hospitalCommentService.findFirst10ByHospitalIdOrderByDateDesc(id));
         return "/place/hospital";
     }
 	

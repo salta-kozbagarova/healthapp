@@ -3,6 +3,8 @@ package kz.salikhanova.healthapp.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import kz.salikhanova.healthapp.dao.HospitalCommentDao;
@@ -22,6 +24,11 @@ public class HospitalCommentServiceImpl implements HospitalCommentService {
 	@Override
 	public List<HospitalComment> findByHospitalId(Long hospitalId) {
 		return hospitalCommentDao.findByHospitalId(hospitalId);
+	}
+
+	@Override
+	public Page<HospitalComment> findByHospitalId(Long hospitalId, Pageable pageRequest) {
+		return hospitalCommentDao.findByHospitalId(hospitalId, pageRequest);
 	}
 
 	@Override

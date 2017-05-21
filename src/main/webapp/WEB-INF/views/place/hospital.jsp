@@ -143,21 +143,53 @@
 				</c:otherwise>
 			</c:choose>
 			<hr>
-			<div id="comments">
-			<c:forEach items="${comments}" var="comment">
-				<div class="row off2">
-					<div class="grid_6">
-						<h4><c:out value="${comment.user.username}" /></h4>
-						<p><c:out value="${comment.comment}" /></p>
-					</div>
+			<div class="row off2">
+				<div class="grid_6">
+				<div id="comments">
 				</div>
-			</c:forEach>
+				<div id="moreComments" style="cursor:pointer; text-align:center">
+				</div>
+				</div>
 			</div>
           </div>
         </section>
        </main>
 <script>
 $(function(){
+	var page = 0;
+	loadComments();
+	function loadComments(){
+		var id = ${hospital.id};
+		$.ajax({
+		    type: 'GET',
+		    url: ctx+"/hospital/comments",
+		    dataType: 'json',
+		    contentType: 'application/json',
+		    data: {id:id,pageNumber:page},
+		    success: function(response) {
+		    	if((response.totalPages-1)>page){
+		    		page = response.number+1;
+		    		var leftComments;
+		    		if((page+1)==response.totalPages){
+		    			leftComments = response.totalElements%response.size;
+		    		} else{
+		    			leftComments = response.size;//response.totalElements - (page*response.size);
+		    		}
+		    		$('#moreComments').html('');
+		    		$('#moreComments').append("<p>еще "+leftComments+"</p>");
+		    	} else{
+		    		$('#moreComments').html('');
+		    	}
+		    	var cmntArr = response.content;
+		    	$.each(cmntArr,function(i){
+		    		var cmnt = cmntArr[i];
+		    		newCommentBlock = "<div class=\"row off2\"><div class=\"grid_6\"><h4>" + cmnt.user.username + "</h4><p>" + cmnt.comment + "</p><p>" + cmnt.formattedDate + "</p></div></div>";
+			    	$("#comments").append(newCommentBlock);
+		    	});
+		    }
+	    });
+	}
+	$('#moreComments').click(function(){loadComments()});
 	
 	$('.priceRating').click(function(){
 		var rateNum = $(this).data('index');
@@ -210,7 +242,7 @@ $(function(){
 	    var comment = $(this).serialize();
 	    $.ajax({
 		    type: 'POST',
-		    url: ctx+"/hospital/leave-a-comment?id="+${hospital.id},
+		    url: ctx+"/hospital/leave-a-comment?hospitalId="+${hospital.id},
 		    data: comment,
 		    success: function(data) {
 		    	newCommentBlock = "<div class=\"row off2\"><div class=\"grid_6\"><h4>" + data.username + "</h4><p>" + data.comment + "</p></div></div>";
