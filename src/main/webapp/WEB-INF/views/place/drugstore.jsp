@@ -42,13 +42,13 @@
               	<div id="map"></div>
               </div>
               <div class="grid_6">
-	              <h2><c:out value="${drugstore.naimenovanieAptek}" /></h2>
+	              <h4><c:out value="${drugstore.naimenovanieAptek}" /></h4>
 	              <div class="row">
                   <div class="grid_3">
                     <dl class="info">
-                      <dt>Name</dt>
+                      <dt><spring:message code="drugstore.name" /></dt>
                       <dd><c:out value="${drugstore.naimenovanieAptek}" /></dd>
-                      <dt>Address</dt>
+                      <dt><spring:message code="drugstore.address" /></dt>
                       <dd><c:out value="${drugstore.address}" /></dd>
                     </dl>
                   </div>
@@ -56,10 +56,10 @@
                   	<div style="text-align:center"><p><spring:message code="drugstoreRating.price" /></p></div>
                     <div style="text-align:center">
 	                  <c:forEach begin="1" end="${drugstore.priceRating}" varStatus="loop">
-                  		<i class="fa fa-star" aria-hidden="true" style="cursor:pointer"></i>
+                  		<i class="fa fa-star" aria-hidden="true"></i>
 					  </c:forEach>
 					  <c:forEach begin="${drugstore.priceRating+1}" end="${maxRateValue}" varStatus="loop">
-                  		<i class="fa fa-star" aria-hidden="true" style="color:gray;cursor:pointer"></i>
+                  		<i class="fa fa-star" aria-hidden="true" style="color:gray;"></i>
 					  </c:forEach>
                   	</div>
                   	<div style="text-align:center">
@@ -68,10 +68,10 @@
                   	<div style="text-align:center"><p><spring:message code="drugstoreRating.drugsAvailability" /></p></div>
                     <div style="text-align:center">
 	                  <c:forEach begin="1" end="${drugstore.drugsAvailabilityRating}" varStatus="loop">
-                  		<i class="fa fa-star" aria-hidden="true" style="cursor:pointer"></i>
+                  		<i class="fa fa-star" aria-hidden="true"></i>
 					  </c:forEach>
 					  <c:forEach begin="${drugstore.drugsAvailabilityRating+1}" end="${maxRateValue}" varStatus="loop">
-                  		<i class="fa fa-star" aria-hidden="true" style="color:gray;cursor:pointer"></i>
+                  		<i class="fa fa-star" aria-hidden="true" style="color:gray;"></i>
 					  </c:forEach>
                   	</div>
                   	<div style="text-align:center">

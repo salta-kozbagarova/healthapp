@@ -26,14 +26,22 @@ public class DrugstoreRatingServiceImpl implements DrugstoreRatingService {
 	public Short calculatePriceAvg(Long drugstoreId) {
 		Long sum = drugstoreRatingDao.getPriceSum(drugstoreId);
 		Long count = drugstoreRatingDao.getPriceCount(drugstoreId);
-		return (short) (sum/count);
+		if(sum==null || count==null){
+			return null;
+		} else{
+			return (short) (sum/count);
+		}
 	}
 
 	@Override
 	public Short calculateDrugsAvailabilityAvg(Long drugstoreId) {
 		Long sum = drugstoreRatingDao.getDrugsAvailabilitySum(drugstoreId);
 		Long count = drugstoreRatingDao.getDrugsAvailabilityCount(drugstoreId);
-		return (short) (sum/count);
+		if(sum==null || count==null){
+			return null;
+		} else{
+			return (short) (sum/count);
+		}
 	}
 
 	@Override

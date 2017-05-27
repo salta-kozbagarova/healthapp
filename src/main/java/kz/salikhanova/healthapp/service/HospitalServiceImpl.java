@@ -6,6 +6,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -41,7 +43,7 @@ public class HospitalServiceImpl implements HospitalService {
 	private CalculatedHospitalRatingService calculatedHospitalRatingService;
 	
 	@Override
-	public List<Hospital> findAll() {
+	public List<Hospital> findAll(Boolean nameSort, Boolean priceSort, Boolean serviceSort) {
 		List<Hospital> hospitals = new ArrayList<Hospital>();
 		try{
 			URL url = new URL(this.egovApiUrl);
@@ -91,11 +93,39 @@ public class HospitalServiceImpl implements HospitalService {
 				}
 				hospitals.add(hospital);
 			}
+			if(nameSort!=null && nameSort==true){
+				Collections.sort(hospitals, new Comparator<Hospital>(){
+					@Override
+					public int compare(Hospital arg0, Hospital arg1) {
+						return arg1.getNaimenovanieOganizacii().compareTo(arg0.getNaimenovanieOganizacii());
+					}
+					
+				});
+			}
+			if(priceSort!=null && priceSort==true){
+				Collections.sort(hospitals, new Comparator<Hospital>(){
+					@Override
+					public int compare(Hospital arg0, Hospital arg1) {
+						return arg1.getPriceRating().compareTo(arg0.getPriceRating());
+					}
+					
+				});
+			}
+			if(serviceSort!=null && serviceSort==true){
+				Collections.sort(hospitals, new Comparator<Hospital>(){
+					@Override
+					public int compare(Hospital arg0, Hospital arg1) {
+						return arg1.getServiceRating().compareTo(arg0.getServiceRating());
+					}
+					
+				});
+			}
 			for (Hospital h : hospitals) {
 				System.out.println(h.toString());
 			}
 		} catch(Exception e){
 			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		return hospitals;
 	}

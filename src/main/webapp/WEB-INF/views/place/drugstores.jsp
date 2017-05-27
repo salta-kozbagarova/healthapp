@@ -63,31 +63,26 @@
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1eYhE8DgMPKw78c4t-ER7WONluE7cjkE&callback=initMap"></script>
 <div style="overflow-y:scroll; height:800px;width:35%">
 
-		<section class="well ins1">
+		<section class="ins1">
+		<div class="container hr" style="width:100%; !important">
+			<span><spring:message code="label.sortBy" /></span>
+			<select onchange="location = this.value;">
+				<option value="${contextPath}/places/drugstores?nameSort=true"><spring:message code="label.sortBy.name" /></option>
+				<option value="${contextPath}/places/drugstores?priceSort=true"><spring:message code="label.sortBy.price" /></option>
+				<option value="${contextPath}/places/drugstores?drugsSort=true"><spring:message code="label.sortBy.drugs" /></option>
+			</select>
+		</div>
           <div class="container hr" style="width:100%; !important">
             <ul class="row product-list" style="margin-left:-20px;">
               <li class="grid_6">
               <c:forEach items="${drugstores}" var="drugstore">
               	<div class="box wow fadeInRight drugstoreItem" data-lat="<c:out value="${drugstore.lat}"/>" data-lng="<c:out value="${drugstore.lng}"/>">
-                  <div class="box_aside">
-                    <div class="icon fa-plus"></div>
+                  <div class="box_aside grid_4">
+                    <h5><a onclick="window.open('${contextPath}/places/drugstore?id=${drugstore.id}', '_blank')" style="cursor:pointer"><c:out value="${drugstore.naimenovanieAptek}" /></a></h5>
                   </div>
-                  <div class="box_cnt__no-flow" style="float:left; width:350px;">
-                    <h3><a onclick="window.open('${contextPath}/places/drugstore?id=${drugstore.id}', '_blank')" style="cursor:pointer"><c:out value="${drugstore.naimenovanieAptek}" /></a></h3>
-                    <p><c:out value="${drugstore.address}" /></p>
-                  </div>
-                  <div class="box_right_side">
-	                  <div>
-		                  <c:forEach begin="1" end="${drugstore.priceRating}" varStatus="loop">
-	                  		<i class="fa fa-star" aria-hidden="true"></i>
-						  </c:forEach>
-						  <c:forEach begin="1" end="${maxRateValue-drugstore.priceRating}" varStatus="loop">
-	                  		<i class="fa fa-star" aria-hidden="true" style="color:gray"></i>
-						  </c:forEach>
-	                  </div>
-	                  <div>
-	                  <h3>${drugstore.priceCount}</h3>
-	                  </div>
+                  <div class="grid_4">
+                    <span style="margin-right:20px"><spring:message code="drugstoreRating.price" /> ${drugstore.priceRating}</span>
+                    <span><spring:message code="drugstoreRating.drugsAvailability" /> ${drugstore.drugsAvailabilityRating}</span>
                   </div>
                 </div>
                 <hr>

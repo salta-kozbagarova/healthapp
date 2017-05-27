@@ -42,21 +42,21 @@
               	<div id="map"></div>
               </div>
               <div class="grid_6">
-	              <h2><c:out value="${hospital.naimenovanieOganizacii}" /></h2>
+	              <h4><c:out value="${hospital.naimenovanieOganizacii}" /></h4>
 	              <div class="row">
                   <div class="grid_3">
                     <dl class="info">
-                      <dt>Name</dt>
+                      <dt><spring:message code="hospital.name" /></dt>
                       <dd><c:out value="${hospital.naimenovanieOganizacii}" /></dd>
-                      <dt>Address</dt>
+                      <dt><spring:message code="hospital.address" /></dt>
                       <dd><c:out value="${hospital.address}" /></dd>
-                      <dt>Address</dt>
+                      <dt><spring:message code="hospital.siteAddress" /></dt>
                       <dd><c:out value="${hospital.siteAddress}" /></dd>
-                      <dt>Address</dt>
+                      <dt><spring:message code="hospital.phonenumber" /></dt>
                       <dd><c:out value="${hospital.phonenumber}" /></dd>
-                      <dt>Address</dt>
+                      <dt><spring:message code="hospital.headName" /></dt>
                       <dd><c:out value="${hospital.headName}" /></dd>
-                      <dt>Address</dt>
+                      <dt><spring:message code="hospital.visitTime" /></dt>
                       <dd><c:out value="${hospital.visitTime}" /></dd>
                     </dl>
                   </div>
@@ -64,10 +64,10 @@
                   	<div style="text-align:center"><p><spring:message code="hospitalRating.price" /></p></div>
                     <div style="text-align:center">
 	                  <c:forEach begin="1" end="${hospital.priceRating}" varStatus="loop">
-                  		<i class="fa fa-star" aria-hidden="true" style="cursor:pointer"></i>
+                  		<i class="fa fa-star" aria-hidden="true"></i>
 					  </c:forEach>
 					  <c:forEach begin="${hospital.priceRating+1}" end="${maxRateValue}" varStatus="loop">
-                  		<i class="fa fa-star" aria-hidden="true" style="color:gray;cursor:pointer"></i>
+                  		<i class="fa fa-star" aria-hidden="true" style="color:gray;"></i>
 					  </c:forEach>
                   	</div>
                   	<div style="text-align:center">
@@ -76,10 +76,10 @@
                   	<div style="text-align:center"><p><spring:message code="hospitalRating.service" /></p></div>
                     <div style="text-align:center">
 	                  <c:forEach begin="1" end="${hospital.serviceRating}" varStatus="loop">
-                  		<i class="fa fa-star" aria-hidden="true" style="cursor:pointer"></i>
+                  		<i class="fa fa-star" aria-hidden="true"></i>
 					  </c:forEach>
 					  <c:forEach begin="${hospital.serviceRating+1}" end="${maxRateValue}" varStatus="loop">
-                  		<i class="fa fa-star" aria-hidden="true" style="color:gray;cursor:pointer"></i>
+                  		<i class="fa fa-star" aria-hidden="true" style="color:gray;"></i>
 					  </c:forEach>
                   	</div>
                   	<div style="text-align:center">

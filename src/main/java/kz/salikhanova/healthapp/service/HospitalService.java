@@ -8,7 +8,7 @@ import kz.salikhanova.healthapp.model.Hospital;
 
 public interface HospitalService {
 	
-	List<Hospital> findAll();
+	List<Hospital> findAll(Boolean nameSort, Boolean priceSort, Boolean serviceSort);
 	Hospital findOne(Long id);
 	void ratePrice(Long id, Short price);
 	void rateService(Long id, Short service);

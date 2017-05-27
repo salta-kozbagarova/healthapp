@@ -6,6 +6,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class DrugstoreServiceImpl implements DrugstoreService {
 	private CalculatedDrugstoreRatingService calculatedDrugstoreRatingService;
 	
 	@Override
-	public List<Drugstore> findAll() {
+	public List<Drugstore> findAll(Boolean nameSort, Boolean priceSort, Boolean drugsSort) {
 		List<Drugstore> drugstores = new ArrayList<Drugstore>();
 		try{
 			URL url = new URL(this.egovApiUrl);
@@ -88,11 +90,39 @@ public class DrugstoreServiceImpl implements DrugstoreService {
 				}
 				drugstores.add(drugstore);
 			}
+			if(nameSort!=null && nameSort==true){
+				Collections.sort(drugstores, new Comparator<Drugstore>(){
+					@Override
+					public int compare(Drugstore arg0, Drugstore arg1) {
+						return arg1.getNaimenovanieAptek().compareTo(arg0.getNaimenovanieAptek());
+					}
+					
+				});
+			}
+			if(priceSort!=null && priceSort==true){
+				Collections.sort(drugstores, new Comparator<Drugstore>(){
+					@Override
+					public int compare(Drugstore arg0, Drugstore arg1) {
+						return arg1.getPriceRating().compareTo(arg0.getPriceRating());
+					}
+					
+				});
+			}
+			if(drugsSort!=null && drugsSort==true){
+				Collections.sort(drugstores, new Comparator<Drugstore>(){
+					@Override
+					public int compare(Drugstore arg0, Drugstore arg1) {
+						return arg1.getDrugsAvailabilityRating().compareTo(arg0.getDrugsAvailabilityRating());
+					}
+					
+				});
+			}
 			for (Drugstore ds : drugstores) {
 				System.out.println(ds.toString());
 			}
 		} catch(Exception e){
 			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		return drugstores;
 	}

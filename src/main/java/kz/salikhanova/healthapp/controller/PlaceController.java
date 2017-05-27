@@ -46,15 +46,15 @@ public class PlaceController {
 	private Properties appParams;
 	
 	@RequestMapping(value = "/drugstores", method = RequestMethod.GET)
-    public String drugstores(Model model) {
-		model.addAttribute("drugstores", drugstoreService.findAll());
+    public String drugstores(@RequestParam(value = "nameSort", required=false) Boolean nameSort, @RequestParam(value = "priceSort", required=false) Boolean priceSort, @RequestParam(value = "drugsSort", required=false) Boolean drugsSort, Model model) {
+		model.addAttribute("drugstores", drugstoreService.findAll(nameSort, priceSort, drugsSort));
 		model.addAttribute("maxRateValue", appParams.getProperty("app.places.maxRateValue"));
-        return "/place/drugstores";
+		return "/place/drugstores";
     }
 	
 	@RequestMapping(value = "/hospitals", method = RequestMethod.GET)
-    public String hospitals(Model model) {
-		model.addAttribute("hospitals", hospitalService.findAll());
+    public String hospitals(@RequestParam(value = "nameSort", required=false) Boolean nameSort, @RequestParam(value = "priceSort", required=false) Boolean priceSort, @RequestParam(value = "serviceSort", required=false) Boolean serviceSort, Model model) {
+		model.addAttribute("hospitals", hospitalService.findAll(nameSort, priceSort, serviceSort));
 		model.addAttribute("maxRateValue", appParams.getProperty("app.places.maxRateValue"));
         return "/place/hospitals";
     }

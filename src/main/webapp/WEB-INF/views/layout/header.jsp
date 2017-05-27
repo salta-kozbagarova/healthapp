@@ -51,7 +51,7 @@
           <div class="container">
             <nav class="nav">
               <ul data-type="navbar" class="sf-menu">
-                <li class="active"><a href="${contextPath}/home"><spring:message code="page.home"/></a>
+                <li><a href="${contextPath}/home"><spring:message code="page.home"/></a>
                 </li>
                 <li><a onclick="return false;"><spring:message code="page.drugstoresAndMedicalFacilities"/></a>
                   <ul>
@@ -71,5 +71,11 @@
             </nav>
           </div>
         </div>
+        <script>
+        $(".nav a").on("click", function(){
+       	   $(".nav").find(".active").removeClass("active");
+       	   $(this).parent().addClass("active");
+       	});
+        </script>
       </header>
       

@@ -26,14 +26,22 @@ public class HospitalRatingServiceImpl implements HospitalRatingService {
 	public Short calculatePriceAvg(Long hospitalId) {
 		Long sum = hospitalRatingDao.getPriceSum(hospitalId);
 		Long count = hospitalRatingDao.getPriceCount(hospitalId);
-		return (short) (sum/count);
+		if(sum==null || count==null){
+			return null;
+		} else{
+			return (short) (sum/count);
+		}
 	}
 
 	@Override
 	public Short calculateServiceAvg(Long hospitalId) {
 		Long sum = hospitalRatingDao.getServiceSum(hospitalId);
 		Long count = hospitalRatingDao.getServiceCount(hospitalId);
-		return (short) (sum/count);
+		if(sum==null || count==null){
+			return null;
+		} else{
+			return (short) (sum/count);
+		}
 	}
 
 	@Override
