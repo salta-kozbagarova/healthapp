@@ -135,14 +135,14 @@ public class HospitalServiceImpl implements HospitalService {
 		Hospital hospital = null;
 		String str="";
 		try{
-			URL url = new URL(this.egovApiUrl);
+			URL url = new URL(this.egovApiUrl+"?source={%20\"size\":1,%20\"query\":%20{%20\"bool\":{%20\"must\":[%20{\"match\":{\"id\":%20\""+id+"\"}}%20]%20}%20}%20}");
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
 			con.setRequestMethod("GET");
 			con.setRequestProperty("User-Agent", "Mozilla/5.0");
 
 			int responseCode = con.getResponseCode();
-			System.out.println("\nSending 'GET' request to URL : " + this.egovApiUrl);
+			System.out.println("\nSending 'GET' request to URL : " + url.toString());
 			System.out.println("Response Code : " + responseCode);
 
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));

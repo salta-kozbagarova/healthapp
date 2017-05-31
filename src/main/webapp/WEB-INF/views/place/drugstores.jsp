@@ -81,8 +81,8 @@
                     <h5><a onclick="window.open('${contextPath}/places/drugstore?id=${drugstore.id}', '_blank')" style="cursor:pointer"><c:out value="${drugstore.naimenovanieAptek}" /></a></h5>
                   </div>
                   <div class="grid_4">
-                    <span style="margin-right:20px"><spring:message code="drugstoreRating.price" /> ${drugstore.priceRating}</span>
-                    <span><spring:message code="drugstoreRating.drugsAvailability" /> ${drugstore.drugsAvailabilityRating}</span>
+                    <span style="margin-right:20px"><spring:message code="drugstoreRating.price" /> ${drugstore.priceRating}/${maxRateValue }</span>
+                    <span><spring:message code="drugstoreRating.drugsAvailability" /> ${drugstore.drugsAvailabilityRating}/${maxRateValue }</span>
                   </div>
                 </div>
                 <hr>

@@ -1,8 +1,10 @@
 package kz.salikhanova.healthapp.controller;
 
+import kz.salikhanova.healthapp.form.PasswordForm;
 import kz.salikhanova.healthapp.model.User;
 import kz.salikhanova.healthapp.service.SecurityService;
 import kz.salikhanova.healthapp.service.UserService;
+import kz.salikhanova.healthapp.validator.PasswordValidator;
 import kz.salikhanova.healthapp.validator.UserValidator;
 
 import javax.annotation.Resource;
@@ -15,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -28,6 +31,9 @@ public class UserController {
 	
 	@Autowired
     private UserValidator userValidator;
+	
+	@Autowired
+    private PasswordValidator passwordValidator;
 	
 	@RequestMapping(value = "/sign-up-form", method = RequestMethod.GET)
     public String signUpForm(Model model) {
@@ -63,8 +69,36 @@ public class UserController {
         return "/site/sign-in";
     }
     
-    @RequestMapping(value = {"/", "/profile"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String profile(Model model) {
+    	model.addAttribute("user",userService.getCurrentUser());
+    	model.addAttribute("passwordForm",new PasswordForm());
+        return "/site/profile";
+    }
+    
+    @RequestMapping(value = "/update-profile", method = RequestMethod.POST)
+    public String updateProfile(@ModelAttribute("user") User user,
+    		BindingResult signupResult, Model model) {
+    	userValidator.validate(user, signupResult);
+        if (signupResult.hasErrors()) {
+        	model.addAttribute("passwordForm",new PasswordForm());
+            return "/site/profile";
+        }
+        userService.updateGeneralData(user);
+        model.addAttribute("passwordForm",new PasswordForm());
+        return "/site/profile";
+    }
+    
+    @RequestMapping(value = "/set-password", method = RequestMethod.POST)
+    public String setPassword(@RequestParam Long id, @ModelAttribute("passwordForm") PasswordForm passwordForm,
+    		BindingResult passwordResult, Model model) {
+    	passwordValidator.validate(passwordForm, passwordResult);
+        if (passwordResult.hasErrors()) {
+        	model.addAttribute("user",userService.getCurrentUser());
+            return "/site/profile";
+        }
+        userService.setNewPassword(id, passwordForm.getPassword());
+        model.addAttribute("user",userService.getCurrentUser());
         return "/site/profile";
     }
 

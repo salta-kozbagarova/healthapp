@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,33 +36,55 @@ public class UserValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         User user = (User) o;
-
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "validation.required");
-        if (user.getUsername().length() < 4 || user.getUsername().length() > 32) {
-            errors.rejectValue("username", "validation.username.size");
-        }
-
-        if (userService.findByUsername(user.getUsername()) != null) {
-            errors.rejectValue("username", "validation.username.duplicate");
-        }
         
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "validation.required");
-        pattern = Pattern.compile(EMAIL_PATTERN);
-        matcher = pattern.matcher(user.getEmail());
-        if (!matcher.matches()) {
-        	errors.rejectValue("email", "validation.email.incorrect", "Enter a correct email");
-        }  
-        if (userService.findByEmail(user.getEmail()) != null) {
-            errors.rejectValue("email", "validation.email.duplicate");
-        }
-        
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "validation.required");
-        if (user.getPassword().length() < 4 || user.getPassword().length() > 32) {
-            errors.rejectValue("password", "validation.password.size");
-        }
+        //validation for a new user
+        if(user.getId()==null){
+        	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "validation.required");
+            if (user.getUsername().length() < 4 || user.getUsername().length() > 32) {
+                errors.rejectValue("username", "validation.username.size");
+            }
 
-        if (!user.getConfirmPassword().equals(user.getPassword())) {
-            errors.rejectValue("confirmPassword", "validation.password.different");
+            if (userService.findByUsername(user.getUsername()) != null) {
+                errors.rejectValue("username", "validation.username.duplicate");
+            }
+            
+            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "validation.required");
+            pattern = Pattern.compile(EMAIL_PATTERN);
+            matcher = pattern.matcher(user.getEmail());
+            if (!matcher.matches()) {
+            	errors.rejectValue("email", "validation.email.incorrect", "Enter a correct email");
+            }  
+            if (userService.findByEmail(user.getEmail()) != null) {
+                errors.rejectValue("email", "validation.email.duplicate");
+            }
+            
+            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "validation.required");
+            if (user.getPassword().length() < 4 || user.getPassword().length() > 32) {
+                errors.rejectValue("password", "validation.password.size");
+            }
+
+            if (!user.getConfirmPassword().equals(user.getPassword())) {
+                errors.rejectValue("confirmPassword", "validation.password.different");
+            }
+        } else{
+        	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "validation.required");
+            if (user.getUsername().length() < 4 || user.getUsername().length() > 32) {
+                errors.rejectValue("username", "validation.username.size");
+            }
+
+            if (userService.findByUsernameAndIdNotIn(user.getUsername(), Arrays.asList(user.getId())) != null) {
+                errors.rejectValue("username", "validation.username.duplicate");
+            }
+            
+            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "validation.required");
+            pattern = Pattern.compile(EMAIL_PATTERN);
+            matcher = pattern.matcher(user.getEmail());
+            if (!matcher.matches()) {
+            	errors.rejectValue("email", "validation.email.incorrect", "Enter a correct email");
+            }  
+            if (userService.findByEmailAndIdNotIn(user.getEmail(), Arrays.asList(user.getId())) != null) {
+                errors.rejectValue("email", "validation.email.duplicate");
+            }
         }
     }
 }

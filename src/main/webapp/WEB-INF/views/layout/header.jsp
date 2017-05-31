@@ -44,8 +44,16 @@
           <div class="brand">
             <h1 class="brand_name"><a href="./">Health</a></h1>
             <p class="brand_slogan">App</p>
-          </div><a href="callto:#" class="fa-phone">800-2345-6789</a>
-          <p>One of our representatives will happily contact you within 24 hours. For urgent needs call us at</p>
+          </div>
+          <c:choose>
+			<c:when test="${pageContext.request.userPrincipal == null}">
+				<p><a href="${contextPath}/sign-in" style="color:#5ab7de; cursor:pointer;"><spring:message code="label.signin" /><i class="fa-sign-in"></i></a></p>
+			</c:when>
+			<c:otherwise>
+				<p><a href="${contextPath}/profile" style="color:#5ab7de; cursor:pointer;">${pageContext.request.userPrincipal.name }</a></p>
+			</c:otherwise>
+		  </c:choose>
+          
         </div>
         <div id="stuck_container" class="stuck_container">
           <div class="container">
