@@ -59,22 +59,20 @@
           <div class="container">
             <nav class="nav">
               <ul data-type="navbar" class="sf-menu">
-                <li><a href="${contextPath}/home"><spring:message code="page.home"/></a>
-                </li>
-                <li><a onclick="return false;"><spring:message code="page.drugstoresAndMedicalFacilities"/></a>
-                  <ul>
-                    <li><a href="${contextPath}/places/drugstores"><spring:message code="page.drugstores"/></a></li>
-                    <li><a href="${contextPath}/places/hospitals"><spring:message code="page.hospitals"/></a></li>
-                    <li><a href="${contextPath}/places/polyclinics"><spring:message code="page.polyclinics"/></a></li>
-                    <li><a href="${contextPath}/places/medical-centers"><spring:message code="page.medicalCenters"/></a></li>
-                  </ul>
-                </li>
-                <li><a href="index-2.html">Services</a>
-                </li>
-                <li><a href="index-3.html">FAQS</a>
-                </li>
-                <li><a href="index-4.html">Contacts</a>
-                </li>
+                <li><a href="${contextPath}/places/drugstores"><spring:message code="page.drugstores"/></a></li>
+                <li><a href="${contextPath}/places/hospitals"><spring:message code="page.hospitals"/></a></li>
+                <li><a href="${contextPath}/places/polyclinics"><spring:message code="page.polyclinics"/></a></li>
+                <li><a href="${contextPath}/places/medical-centers"><spring:message code="page.medicalCenters"/></a></li>
+              </ul>
+              <ul data-type="navbar" class="sf-menu" style="float:right">
+              <c:choose>
+				<c:when test="${pageContext.request.userPrincipal == null}">
+					<li><a href="${contextPath}/sign-in" style="color:#5ab7de; cursor:pointer;"><spring:message code="label.signin" /><i class="fa-sign-in"></i></a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="${contextPath}/profile" style="color:#5ab7de; cursor:pointer;">${pageContext.request.userPrincipal.name }</a></li>
+				</c:otherwise>
+			  </c:choose>
               </ul>
             </nav>
           </div>
@@ -84,6 +82,9 @@
        	   $(".nav").find(".active").removeClass("active");
        	   $(this).parent().addClass("active");
        	});
+        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+			$('.brand').remove();
+       	}
         </script>
       </header>
       
