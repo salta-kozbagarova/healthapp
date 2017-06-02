@@ -67,10 +67,18 @@
               <ul data-type="navbar" class="sf-menu" style="float:right">
               <c:choose>
 				<c:when test="${pageContext.request.userPrincipal == null}">
-					<li><a href="${contextPath}/sign-in" style="color:#5ab7de; cursor:pointer;"><spring:message code="label.signin" /><i class="fa-sign-in"></i></a></li>
+					<li><a href="${contextPath}/sign-in" style="cursor:pointer;"><spring:message code="label.signin" /><i class="fa-sign-in"></i></a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="${contextPath}/profile" style="color:#5ab7de; cursor:pointer;">${pageContext.request.userPrincipal.name }</a></li>
+					<li><a href="${contextPath}/profile" style="cursor:pointer;">${pageContext.request.userPrincipal.name }</a>
+					<ul>
+					<li>
+					<form id="logoutForm" method="POST" action="${contextPath}/logout">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+					</form>
+					<a onclick="document.forms['logoutForm'].submit()">Logout</a></li>
+					</ul>
+					</li>
 				</c:otherwise>
 			  </c:choose>
               </ul>

@@ -81,9 +81,4 @@
 </div>
 </section>
 </main>
-
-<form id="logoutForm" method="POST" action="${contextPath}/logout">
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-</form>
-<a onclick="document.forms['logoutForm'].submit()"><span style="padding-right:5px" class="glyphicon glyphicon-log-in"></span>Logout</a>
 <%@include file="../layout/footer.jsp"%>
