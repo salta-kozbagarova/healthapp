@@ -9,6 +9,7 @@
 
 <section class="well1">
 <div class="container">
+	<h4><spring:message code="label.editingGeneralInfo" /></h4>
 	<div class="row off2">
 	<div class="grid_6">
 		<form:form id="generalForm" method="POST" modelAttribute="user" class="mailform off2" action="${contextPath}/update-profile">
@@ -41,12 +42,13 @@
       	</label>
         <label class="grid_4" style="margin-left:auto;">
         <div class="form-group">
-        <a onclick="document.forms['generalForm'].submit()" style="font-size:18px;color:#5ab7de; cursor:pointer;float:right;">save</a>
+        <a onclick="document.forms['generalForm'].submit()" style="font-size:18px;color:#5ab7de; cursor:pointer;float:right;"><spring:message code="label.save" /></a>
         </div>
         </label>
     </form:form>
     </div>
 	</div>
+	<h4><spring:message code="label.changingPassword" /></h4>
 	<div class="row off2">
 	<div class="grid_6">
 		<form:form id="passwordForm" method="POST" modelAttribute="passwordForm" class="mailform off2" action="${contextPath}/set-password?id=${user.id }">
@@ -74,7 +76,7 @@
         </label>
         <label class="grid_4" style="margin-left:auto;">
         <div class="form-group">
-        <a onclick="document.forms['passwordForm'].submit()" style="font-size:18px;color:#5ab7de; cursor:pointer;float:right;">save</a>
+        <a onclick="document.forms['passwordForm'].submit()" style="font-size:18px;color:#5ab7de; cursor:pointer;float:right;"><spring:message code="label.save" /></a>
         </div>
         </label>
 		</form:form>

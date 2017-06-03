@@ -45,15 +45,6 @@
             <h1 class="brand_name"><a href="./">Health</a></h1>
             <p class="brand_slogan">App</p>
           </div>
-          <c:choose>
-			<c:when test="${pageContext.request.userPrincipal == null}">
-				<p><a href="${contextPath}/sign-in" style="color:#5ab7de; cursor:pointer;"><spring:message code="label.signin" /><i class="fa-sign-in"></i></a></p>
-			</c:when>
-			<c:otherwise>
-				<p><a href="${contextPath}/profile" style="color:#5ab7de; cursor:pointer;">${pageContext.request.userPrincipal.name }</a></p>
-			</c:otherwise>
-		  </c:choose>
-          
         </div>
         <div id="stuck_container" class="stuck_container">
           <div class="container">
@@ -76,7 +67,7 @@
 					<form id="logoutForm" method="POST" action="${contextPath}/logout">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					</form>
-					<a onclick="document.forms['logoutForm'].submit()">Logout</a></li>
+					<a onclick="document.forms['logoutForm'].submit()"><spring:message code="label.logout" /></a></li>
 					</ul>
 					</li>
 				</c:otherwise>

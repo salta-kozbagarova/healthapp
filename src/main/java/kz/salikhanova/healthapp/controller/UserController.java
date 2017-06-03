@@ -99,6 +99,7 @@ public class UserController {
         }
         userService.setNewPassword(id, passwordForm.getPassword());
         model.addAttribute("user",userService.getCurrentUser());
+        //securityService.autoLogin(userService.getCurrentUser().getUsername(), passwordForm.getPassword());
         return "/site/profile";
     }
 
